@@ -4,7 +4,9 @@
   "main": "src/shared/infra/http/server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts"
+    "dev": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "dev:test": "NODE_ENV=test tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "test": "NODE_ENV=test tsnd -r tsconfig-paths/register src/shared/tests/index.ts"
   },
   "devDependencies": {
     "@types/node": "^14.14.37",
