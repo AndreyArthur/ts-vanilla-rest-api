@@ -48,13 +48,24 @@
           "error"
         ]
       }
+    ],
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
     ]
   },
   "overrides": [
     {
-      "files": ["**.spec.ts"],
+      "files": [
+        "**.spec.ts",
+        "**/tests/**"
+      ],
       "rules": {
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "no-console": "off"
       }
     }
   ],
