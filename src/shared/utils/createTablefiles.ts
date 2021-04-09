@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 export default function createTableFiles(): void {
-  const expectedTableFiles = ['users.json', 'users.test.json', '.gitkeep'];
+  const expectedTableFiles = ['users.json', 'users.test.json'];
 
   const missingTableFiles = expectedTableFiles
     .filter((file) => (

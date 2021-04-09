@@ -16,7 +16,9 @@ describe('CreateAndAuthenticateUser', () => {
 
     createUser({
       name: generateRandomString(16),
-      email: generateRandomString(12),
+      email: `${generateRandomString(4)
+      }@${generateRandomString(4)}.${
+        generateRandomString(4)}`,
       password: userPassword,
     });
 
