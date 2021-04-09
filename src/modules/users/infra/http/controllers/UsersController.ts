@@ -5,6 +5,7 @@ import UsersRepository from '@modules/users/repositories/UsersRepository';
 import CreateUserService from '@modules/users/services/CreateUser';
 import globalExceptionHandlerMiddleware
   from '@shared/infra/http/middlewares/globalExceptionHandler';
+import validateFields from '@shared/utils/validateFields';
 
 export default class UserController {
   public create(
@@ -17,8 +18,6 @@ export default class UserController {
     });
 
     return req.on('end', () => {
-      const { name, email, password } = body;
-
       const usersRepository = new UsersRepository();
 
       const createUser = new CreateUserService(usersRepository);
@@ -26,7 +25,11 @@ export default class UserController {
       let user = {} as User;
 
       try {
-        user = createUser.execute({ name, email, password });
+        user = createUser.execute(validateFields({
+          name: '',
+          email: '%any%@%any%.%any%',
+          password: '',
+        }, body));
       } catch (err) {
         return globalExceptionHandlerMiddleware(err, req, res);
       }

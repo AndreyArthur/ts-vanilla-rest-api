@@ -5,6 +5,7 @@ import UsersRepository from '@modules/users/repositories/UsersRepository';
 import globalExceptionHandlerMiddleware
   from '@shared/infra/http/middlewares/globalExceptionHandler';
 import CreateSessionService from '@modules/users/services/CreateSession';
+import validateFields from '@shared/utils/validateFields';
 
 export default class SessionsController {
   public create(
@@ -17,8 +18,6 @@ export default class SessionsController {
     });
 
     return req.on('end', () => {
-      const { email, password } = body;
-
       const usersRepository = new UsersRepository();
 
       const createSession = new CreateSessionService(usersRepository);
@@ -26,7 +25,10 @@ export default class SessionsController {
       let session = {} as { user: User, token: string };
 
       try {
-        session = createSession.execute({ email, password });
+        session = createSession.execute(validateFields({
+          email: '%any%@%any%.%any%',
+          password: '',
+        }, body));
       } catch (err) {
         return globalExceptionHandlerMiddleware(err, req, res);
       }
