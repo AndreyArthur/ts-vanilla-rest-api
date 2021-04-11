@@ -8,7 +8,7 @@ import cors from '../middlewares/cors';
 
 export default function routes(
   req: http.IncomingMessage, res: http.ServerResponse,
-): http.IncomingMessage | void {
+): Promise<void> | void {
   cors(req, res);
 
   try {

@@ -7,6 +7,7 @@ import User from '@modules/users/models/User';
 import expect from '@shared/tests/expect';
 import writeTable from '@shared/utils/writeTable';
 import database from '@shared/database';
+import getBody from '@shared/infra/http/middlewares/getBody';
 
 describe('CreateAndAuthenticateUser', () => {
   writeTable(database.users, []);
@@ -14,55 +15,44 @@ describe('CreateAndAuthenticateUser', () => {
   it('should create a authenticate user successfully', async () => {
     const userPassword = generateRandomString(8);
 
-    createUser({
-      name: generateRandomString(16),
-      email: `${generateRandomString(4)
-      }@${generateRandomString(4)}.${
-        generateRandomString(4)}`,
-      password: userPassword,
-    });
-
-    function createUser(
-      userCredentials: Pick<User, 'name' | 'email' | 'password'>,
-    ): void {
+    const createdUser = await new Promise((resolve) => {
       const userRequest = http.request({
         host: 'localhost',
         port: 3333,
         method: 'POST',
         path: '/users/',
-      }, (res: http.IncomingMessage) => {
-        const chunks: any[] = [];
+      }, async (res: http.IncomingMessage) => {
+        const body = await getBody(res) as unknown as User;
 
-        res.on('data', (chunk) => chunks.push(chunk));
-
-        res.on('end', () => {
-          const user = JSON.parse(chunks.join(''));
-
-          return createSession(user);
-        });
+        resolve(body);
       });
 
-      userRequest.write(JSON.stringify(userCredentials));
+      userRequest.write(JSON.stringify({
+        name: generateRandomString(16),
+        email: `${
+          generateRandomString(4)
+        }@${
+          generateRandomString(4)
+        }.${
+          generateRandomString(4)}`,
+        password: userPassword,
+      }));
 
       userRequest.end();
-    }
+    }) as User;
 
-    function createSession(createdUser: User): void {
+    const { user, token } = await new Promise((resolve) => {
       const sessionRequest = http.request({
         host: 'localhost',
         port: 3333,
         method: 'POST',
         path: '/sessions/',
-      }, (res: http.IncomingMessage) => {
-        const chunks: any[] = [];
+      }, async (res: http.IncomingMessage) => {
+        const body = await getBody(
+          res,
+        ) as unknown as {user: User, token: string};
 
-        res.on('data', (chunk) => chunks.push(chunk));
-
-        res.on('end', () => {
-          const { user, token } = JSON.parse(chunks.join(''));
-
-          return assert(user, token);
-        });
+        resolve(body);
       });
 
       sessionRequest.write(JSON.stringify({
@@ -71,12 +61,10 @@ describe('CreateAndAuthenticateUser', () => {
       }));
 
       sessionRequest.end();
-    }
+    }) as {user: User, token: string};
 
-    function assert(user: User, token: string): void {
-      expect(!!token);
-      expect(!!user);
-    }
+    expect(!!token);
+    expect(user.name === createdUser.name);
   });
 
   writeTable(database.users, []);

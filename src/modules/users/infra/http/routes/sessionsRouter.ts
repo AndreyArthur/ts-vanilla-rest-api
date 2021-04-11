@@ -8,7 +8,7 @@ const sessionsController = new SessionsController();
 
 export default function sessionsRouter(
   req: http.IncomingMessage, res: http.ServerResponse,
-): http.IncomingMessage {
+): Promise<void> {
   if (req.method === 'POST') {
     return sessionsController.create(req, res);
   }
