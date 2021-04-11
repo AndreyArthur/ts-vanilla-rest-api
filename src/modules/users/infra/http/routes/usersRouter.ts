@@ -8,7 +8,7 @@ const usersController = new UsersController();
 
 export default function usersRouter(
   req: http.IncomingMessage, res: http.ServerResponse,
-): http.IncomingMessage {
+): Promise<void> {
   if (req.method === 'POST') {
     return usersController.create(req, res);
   }

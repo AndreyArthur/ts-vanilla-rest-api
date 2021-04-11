@@ -5,4 +5,4 @@ import createTableFiles from '@shared/utils/createTablefiles';
 
 createTableFiles();
 
-http.createServer((req, res) => router(req, res)).listen(3333);
+http.createServer(router).listen(3333);
