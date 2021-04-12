@@ -13,5 +13,9 @@ export default function sessionsRouter(
     return sessionsController.create(req, res);
   }
 
+  if (req.method === 'PUT') {
+    return sessionsController.update(req, res);
+  }
+
   throw new AppError('Endpoint not found', 404);
 }
