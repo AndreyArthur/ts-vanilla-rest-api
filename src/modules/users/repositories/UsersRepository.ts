@@ -1,8 +1,8 @@
 import User from '@modules/users/models/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import database from '@shared/database';
-import readTable from '@shared/utils/readTable';
-import writeTable from '@shared/utils/writeTable';
+import readTable from '@shared/database/utils/readTable';
+import writeTable from '@shared/database/utils/writeTable';
 
 export default class UsersRepository implements IUsersRepository {
   public create(

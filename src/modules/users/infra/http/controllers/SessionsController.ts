@@ -2,7 +2,7 @@ import http from 'http';
 
 import UsersRepository from '@modules/users/repositories/UsersRepository';
 import CreateSessionService from '@modules/users/services/CreateSession';
-import validateFields from '@shared/utils/validateFields';
+import validateFields from '@shared/infra/http/utils/validateFields';
 import getBody from '@shared/infra/http/middlewares/getBody';
 import globalExceptionHandlerMiddleware
   from '@shared/infra/http/middlewares/globalExceptionHandler';
