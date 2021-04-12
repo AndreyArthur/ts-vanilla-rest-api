@@ -30,4 +30,10 @@ export default class UsersRepository implements IUsersRepository {
 
     return users.filter((user) => user.email === email)[0] || undefined;
   }
+
+  public findById(id: string): User | undefined {
+    const users = readTable(database.users) as unknown as User[];
+
+    return users.filter((user) => user.id === id)[0] || undefined;
+  }
 }

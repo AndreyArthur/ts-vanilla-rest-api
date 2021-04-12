@@ -4,6 +4,14 @@ This API is the result of a challenge that I did to myself. I was tired of typin
 
 # Documentation
 
+## Links
+
+<a href="#users">/users/</a>
+<br />
+<a href="#sessions">/sessions/</a>
+
+## Endpoints
+
 - The default response for a request in a not specified endpoint is:
 
 `404 Not Found`
@@ -14,6 +22,8 @@ This API is the result of a challenge that I did to myself. I was tired of typin
   "message": "Endpoint not found"
 }
 ```
+
+<div id="users"></div>
 
 - `/users/`
 
@@ -54,6 +64,8 @@ This API is the result of a challenge that I did to myself. I was tired of typin
         }
       ```
 
+<div id="sessions"></div>
+
 - `/sessions/`
 
   - `POST`
@@ -93,4 +105,39 @@ This API is the result of a challenge that I did to myself. I was tired of typin
           "status": "error",
           "message": "Invaid email/password combination",
         }
+      ```
+
+  - `PUT`
+
+    - This endpoint expect no request body;
+
+    - This is an authenticated endpoint (if the authorization header is null or invalid it will respond with authentication errors);
+
+    - Success response example:
+
+    <code style="color: green;">200 OK</code>
+    ```json
+    {
+      "user": {
+        "id": "9047cf5f-31de-2ad4-d6eb-633893a5c7b2",
+        "name": "Pain",
+        "email": "pain@pain.com",
+        "created_at": "2021-04-11T17:36:25.715Z",
+        "updated_at": "2021-04-11T17:36:25.715Z"
+      },
+      "token": "52b0cb151a5c5afcba5d6b2256202c48.0d016dedf37265748f01b56fb9ae59397575fc5ab63d9f0558c5467254d0c99a6f09f5bfefc32ec3f2276b4acb2ab5688709fe1df626325ebf2bc85eb4be4365b9150f1fad8ccf69109ac59c2a9a647cecfcaefeeb407659"
+    }
+    ```
+
+    - Error response examples:
+
+      - If user that generates the token does not exist anymore:
+
+
+      <code style="color: red;">400 Bad Request</code>
+      ```json
+      {
+        "status": "error",
+        "messages": "Token user does not exist"
+      }
       ```

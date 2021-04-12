@@ -30,11 +30,6 @@ function decrypt(text: string, secretKey: string): string {
   return decrpyted.toString();
 }
 
-interface IToken {
-  expiresIn: number;
-  content: any;
-}
-
 export function sign(
   content: Record<string, unknown>, secret: string, expiration: number,
 ): string {
@@ -44,7 +39,7 @@ export function sign(
   }), secret);
 }
 
-export function decode(token: string, secret: string): IToken {
+export function decode(token: string, secret: string): any {
   try {
     const decoded = JSON.parse(decrypt(token, secret));
 
