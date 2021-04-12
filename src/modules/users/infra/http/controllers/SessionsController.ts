@@ -7,7 +7,8 @@ import getBody from '@shared/infra/http/middlewares/getBody';
 import globalExceptionHandlerMiddleware
   from '@shared/infra/http/middlewares/globalExceptionHandler';
 import UpdateSessionService from '@modules/users/services/UpdateSession';
-import ensureAuthenticatedMiddleware from '../middlewares/ensureAuthenticated';
+import ensureAuthenticatedMiddleware
+  from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 export default class SessionsController {
   public async create(

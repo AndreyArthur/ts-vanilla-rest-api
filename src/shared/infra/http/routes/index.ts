@@ -4,7 +4,7 @@ import usersRouter from '@modules/users/infra/http/routes/usersRouter';
 import sessionsRouter from '@modules/users/infra/http/routes/sessionsRouter';
 import globalExceptionHandlerMiddleware
   from '@shared/infra/http/middlewares/globalExceptionHandler';
-import cors from '../middlewares/cors';
+import cors from '@shared/infra/http/middlewares/cors';
 
 export default function routes(
   req: http.IncomingMessage, res: http.ServerResponse,
