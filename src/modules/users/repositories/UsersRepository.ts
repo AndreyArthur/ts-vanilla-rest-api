@@ -28,4 +28,32 @@ export default class UsersRepository implements IUsersRepository {
 
     return users.filter((user) => user.id === id)[0] || undefined;
   }
+
+  public search(
+    credentials: Partial<Pick<User, 'id'| 'name' | 'email'>>,
+  ): User[] {
+    const users = readTable(database.users) as unknown as User[];
+
+    let foundUsers: User[];
+
+    if (!credentials.email && !credentials.id && !credentials.name) {
+      foundUsers = users;
+    } else {
+      foundUsers = users.filter((user) => {
+        if (
+          credentials.id === user.id
+          || user.name
+            .toLowerCase()
+            .indexOf(credentials.name?.toLowerCase() as unknown as string) > -1
+          || user.email
+            .toLowerCase()
+            .indexOf(credentials.email?.toLowerCase() as unknown as string) > -1
+        ) {
+          return user;
+        }
+      });
+    }
+
+    return foundUsers;
+  }
 }

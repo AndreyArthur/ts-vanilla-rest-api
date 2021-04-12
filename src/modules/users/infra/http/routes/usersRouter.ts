@@ -13,5 +13,9 @@ export default function usersRouter(
     return usersController.create(req, res);
   }
 
+  if (req.method === 'GET') {
+    return usersController.index(req, res);
+  }
+
   throw new AppError('Endpoint not found', 404);
 }
