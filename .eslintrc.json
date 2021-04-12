@@ -58,7 +58,8 @@
     ],
     "@typescript-eslint/explicit-module-boundary-types": ["warn", {
       "allowArgumentsExplicitlyTypedAsAny": true
-    }]
+    }],
+    "no-return-assign": "off"
   },
   "overrides": [
     {
