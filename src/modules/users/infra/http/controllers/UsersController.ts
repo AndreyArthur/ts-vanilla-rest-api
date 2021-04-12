@@ -2,9 +2,9 @@ import http from 'http';
 
 import UsersRepository from '@modules/users/repositories/UsersRepository';
 import CreateUserService from '@modules/users/services/CreateUser';
-import validateFields from '@shared/utils/validateFields';
+import validateFields from '@shared/infra/http/utils/validateFields';
 import getBody from '@shared/infra/http/middlewares/getBody';
-import parseQueryString from '@shared/utils/parseQueryString';
+import parseQueryString from '@shared/infra/http/utils/parseQueryString';
 import globalExceptionHandlerMiddleware
   from '@shared/infra/http/middlewares/globalExceptionHandler';
 import SearchUsersService from '@modules/users/services/SearchUsers';
