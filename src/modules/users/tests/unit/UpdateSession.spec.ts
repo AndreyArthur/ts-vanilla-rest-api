@@ -49,4 +49,6 @@ describe('UpdateSession', () => {
       expect(err instanceof AppError);
     }
   });
+
+  writeTable(database.users, []);
 });
