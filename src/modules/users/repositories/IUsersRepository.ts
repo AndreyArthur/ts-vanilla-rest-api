@@ -7,6 +7,7 @@ interface IUsersRepository {
   save(user: User): void;
   findByEmail(email: string): User | undefined;
   findById(id: string): User | undefined;
+  search(credentials: Partial<Pick<User, 'id'| 'name' | 'email'>>): User[];
 }
 
 export default IUsersRepository;

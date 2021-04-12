@@ -64,6 +64,43 @@ This API is the result of a challenge that I did to myself. I was tired of typin
         }
       ```
 
+  - `GET`
+
+    - This endpoint has optional query params: `name`, `email`, `id` (that make an `OR` operation, not `AND`);
+
+    - Success response example:
+
+    <code style="color: green;">200 OK</code>
+    ```json
+    [
+      {
+        "id": "9041cb5f-31be-3ad4-16eb-633893aec7b2",
+        "name": "Suigetsu",
+        "email": "suigetsu@suigetsu.com",
+        "created_at": "2021-04-07T23:09:32.314Z",
+        "updated_at": "2021-04-07T23:09:32.314Z"
+      },
+      {
+        "id": "83dcc699-682a-bbc9-a20d-c7b026e6786c",
+        "name": "Karin",
+        "email": "karin@karin.com",
+        "created_at": "2021-04-08T00:09:05.828Z",
+        "updated_at": "2021-04-08T00:09:05.828Z"
+      },
+      {
+        "id": "ec6151f7-9b36-8830-f17a-1b9ea7f9105a",
+        "name": "Sasuke",
+        "email": "sasuke@sasuke.com",
+        "created_at": "2021-04-11T17:36:25.715Z",
+        "updated_at": "2021-04-11T17:36:25.715Z"
+      }
+    ]
+    ```
+
+    - There's no error responses for this endpoint, if no users are found endpoint will respond with an empty array;
+
+
+
 <div id="sessions"></div>
 
 - `/sessions/`
@@ -132,7 +169,6 @@ This API is the result of a challenge that I did to myself. I was tired of typin
     - Error response examples:
 
       - If user that generates the token does not exist anymore:
-
 
       <code style="color: red;">400 Bad Request</code>
       ```json
