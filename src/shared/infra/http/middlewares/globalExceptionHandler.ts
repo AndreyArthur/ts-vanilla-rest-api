@@ -3,7 +3,7 @@ import http from 'http';
 import AppError from '@shared/exceptions/AppError';
 
 export default function globalExceptionHandlerMiddleware(
-  err: Error, req: http.IncomingMessage, res: http.ServerResponse,
+  err: Error | AppError, req: http.IncomingMessage, res: http.ServerResponse,
 ): void {
   if (err instanceof AppError) {
     res.writeHead(err.statusCode, { 'Content-Type': 'application/json' });
