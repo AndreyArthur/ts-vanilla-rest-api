@@ -8,7 +8,7 @@ import describe from '@shared/tests/describe';
 import expect from '@shared/tests/expect';
 import it from '@shared/tests/it';
 import generateRandomString from '@shared/utils/generateRandomString';
-import writeTable from '@shared/utils/writeTable';
+import writeTable from '@shared/database/utils/writeTable';
 
 describe('SearchUsers', () => {
   writeTable(database.users, []);

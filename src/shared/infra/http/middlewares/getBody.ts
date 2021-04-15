@@ -2,7 +2,7 @@ import http from 'http';
 
 export default function getBody(
   reqOrRes: http.IncomingMessage,
-): Promise<Record<string, unknown>> {
+): Promise<any> {
   return new Promise((resolve, reject) => {
     const chunks: any[] = [];
 
