@@ -59,7 +59,9 @@
     "@typescript-eslint/explicit-module-boundary-types": ["warn", {
       "allowArgumentsExplicitlyTypedAsAny": true
     }],
-    "no-return-assign": "off"
+    "no-return-assign": "off",
+    "indent": "off",
+    "@typescript-eslint/indent": ["error", 2]
   },
   "overrides": [
     {
