@@ -8,7 +8,7 @@ import expect from '@shared/tests/expect';
 import it from '@shared/tests/it';
 import generateRandomString from '@shared/utils/generateRandomString';
 import uuid from '@shared/utils/uuid';
-import writeTable from '@shared/utils/writeTable';
+import writeTable from '@shared/database/utils/writeTable';
 
 describe('UpdateSession', () => {
   writeTable(database.users, []);
@@ -36,7 +36,7 @@ describe('UpdateSession', () => {
 
   writeTable(database.users, []);
 
-  it('should throw an error because given user does not exists', () => {
+  it('should throw an error because given user does not exist', () => {
     const usersRepository = new UsersRepository();
 
     const updateSession = new UpdateSessionService(usersRepository);
