@@ -6,9 +6,9 @@ This API is the result of a challenge that I did to myself. I was tired of typin
 
 ## Links
 
-<a href="#users">/users/</a>
-<br />
-<a href="#sessions">/sessions/</a>
+- <a href="#users">/users/</a>
+- <a href="#sessions">/sessions/</a>
+- <a href="#posts">/posts/</a>
 
 ## Endpoints
 
@@ -177,3 +177,48 @@ This API is the result of a challenge that I did to myself. I was tired of typin
         "messages": "Token user does not exist"
       }
       ```
+
+<div id="posts"></div>
+
+- `/posts/`
+
+  - `POST`
+
+  - Expected request body example (API will respond with validation errors if request body doesn't match with expected);
+
+  - This is an authenticated endpoint (if the authorization header is null or invalid it will respond with authentication errors)
+
+  ```json
+  {
+    "title": "What does the mask hide?",
+    "description": "The mask hides a sinobi's revolt."
+  }
+  ```
+
+  - Success response example:
+
+  <code style="color: green;">201 Created</code>
+
+  ```json
+  {
+    "id": "8c5e1a9b-f25f-49d2-a44a-f96a9c3da606",
+    "title": "What does the mask hide?",
+    "description": "The mask hides a sinobi's revolt.",
+    "user_id": "40733493-3c8d-6946-d923-572ad8f1c937",
+    "created_at": "2021-04-15T15:49:55.290Z",
+    "updated_at": "2021-04-15T15:49:55.290Z"
+  }
+  ```
+
+  - Error response examples:
+
+    - If user that generates the token does not exist anymore:
+
+    <code style="color: red;">401 Unauthorized</code>
+
+    ```json
+    {
+      "status": "error",
+      "messages": "Only authenticated users can create a post"
+    }
+    ```
