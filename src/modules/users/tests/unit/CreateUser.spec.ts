@@ -6,7 +6,7 @@ import CreateUserService from '@modules/users/services/CreateUser';
 import generateRandomString from '@shared/utils/generateRandomString';
 import { compareHash } from '@modules/users/utils/passwordHash';
 import AppError from '@shared/exceptions/AppError';
-import writeTable from '@shared/utils/writeTable';
+import writeTable from '@shared/database/utils/writeTable';
 import database from '@shared/database';
 
 describe('CreateUser', () => {
